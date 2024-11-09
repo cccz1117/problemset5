@@ -427,12 +427,15 @@ plt.show()
 
 ```{python}
 import geopandas as gpd
-filepath = "enforcement_actions_2021_1.csv"
-data = pd.read_csv(filepath)
-filepath = "US_Attorney_Districts_Shapefile_simplified_20241108.csv"
+filepath1 = "/Users/wsjsmac/Desktop/Autumn/PPHA_30538/mine/Pset_5/pair-from-git/problemset5/enforcement_actions_2021_1.csv"
+data = pd.read_csv(filepath1)
+filepath = "/Users/wsjsmac/Desktop/Autumn/PPHA_30538/mine/Pset_5/pair-from-git/problemset5/US Attorney Districts Shapefile simplified_20241109/geo_export_c632cc9b-772f-489b-8052-e9829f5262fb.shp"
 district = gpd.read_file(filepath)
 ```
 
+```{python}
+district.head()
+```
 ```{python}
 data_district = data[data["Agency"].str.contains("District", case=False, na=False)]
 data_district = data_district.reset_index(drop=True)
@@ -469,12 +472,8 @@ district_count.head()
 ```
 
 ```{python}
-district.rename(columns={'Judicial District': 'Judicial_District'}, inplace=True)
-```
-
-```{python}
 # Ensure state names/abbreviations match in both DataFrames
-merged = district.merge(district_count, left_on='Judicial_District', right_on='Agency_Name', how='right')
+merged = district.merge(district_count, left_on='judicial_d', right_on='Agency_Name', how='right')
 
 merged.head()
 ```
@@ -482,10 +481,12 @@ merged.head()
 ```{python}
 import matplotlib.pyplot as plt
 # Plotting the map
-fig, ax = plt.subplots(1, 1, figsize=(15, 10))
-merged.plot(column='Count', cmap='Blues', linewidth=0.8, edgecolor='0.8', legend=True, ax=ax)
+# Set limits to focus on the contiguous U.S.
+ax.set_xlim(-130, -60)  # Adjust these limits based on the actual extent
+ax.set_ylim(20, 55)
+fig, ax = plt.subplots(1, 1, figsize=(15, 10), dpi=150)
+merged.plot(column='Count', cmap='Blues', linewidth=0.8, edgecolor='0.8', legend=True, ax=ax, aspect=1.5)
 ax.set_title("Number of Enforcement Actions by Judicial District", fontsize=15)
-ax.set_axis_off()
 plt.show()
 
 ```
