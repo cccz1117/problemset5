@@ -1,7 +1,6 @@
 ---
-title: "title"
-author: "author"
-date: "date"
+title: "Pset 5"
+date: "9 November 2024"
 format: 
   pdf:
     include-in-header: 
@@ -26,7 +25,7 @@ output:
 ## Submission Steps (10 pts)
 1. This problem set is a paired problem set.
 2. Play paper, scissors, rock to determine who goes first. Call that person *Partner 1*.
-    - Partner 1 (name and cnet ID):
+    - Partner 1 : Shuping Wu, 
     - Partner 2 : Sijie Wu, sijiewu
 3. Partner 1 will accept the `ps5` and then share the link it creates with their partner. You can only share it with one partner so you will not be able to change it after your partner has accepted. 
 4. "This submission is our work alone and complies with the 30538 integrity policy." Add your initials to indicate your agreement: \*\*\_\_\*\* \*\*\_\_\*\*
@@ -256,11 +255,11 @@ chart1 = alt.Chart(monthly_actions).mark_line().encode(
     width=400,
     height=200
 )
-chart1.save('chart1.svg')
+chart1.save('/Users/wsjsmac/Desktop/Autumn/PPHA_30538/mine/Pset_5/pair-from-git/problemset5/chart1.png')
 
 ```
 
-![Number of Enforcement Actions Over Time](chart1.svg)
+![Number of Enforcement Actions Over Time](chart1.png)
 
 ### 2. Plot the number of enforcement actions categorized: (PARTNER 1)
 
@@ -296,11 +295,11 @@ chart2 = alt.Chart(monthly_actions).mark_line().encode(
 
 # chart2
 
-chart2.save('chart2.svg')
+chart2.save('/Users/wsjsmac/Desktop/Autumn/PPHA_30538/mine/Pset_5/pair-from-git/problemset5/chart2.png')
 
 ```
 
-![Number of Enforcement Actions Over Time by Category](chart2.svg)
+![Number of Enforcement Actions Over Time by Category](chart2.png)
 
 * based on five topics
 
@@ -360,10 +359,10 @@ chart3 = alt.Chart(monthly_actions).mark_line().encode(
 
 #chart3
 
-chart3.save('chart3.svg')
+chart3.save('/Users/wsjsmac/Desktop/Autumn/PPHA_30538/mine/Pset_5/pair-from-git/problemset5/chart3.png')
 ```
 
-![Number of Criminal and Civil Actions Over Time by Topic](chart3.svg)
+![Number of Criminal and Civil Actions Over Time by Topic](chart3.png)
 
 
 
