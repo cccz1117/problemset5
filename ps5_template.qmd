@@ -27,7 +27,7 @@ output:
 1. This problem set is a paired problem set.
 2. Play paper, scissors, rock to determine who goes first. Call that person *Partner 1*.
     - Partner 1 (name and cnet ID):
-    - Partner 2 (name and cnet ID):
+    - Partner 2 : Sijie Wu, sijiewu
 3. Partner 1 will accept the `ps5` and then share the link it creates with their partner. You can only share it with one partner so you will not be able to change it after your partner has accepted. 
 4. "This submission is our work alone and complies with the 30538 integrity policy." Add your initials to indicate your agreement: \*\*\_\_\*\* \*\*\_\_\*\*
 5. "I have uploaded the names of anyone else other than my partner and I worked with on the problem set **[here](https://docs.google.com/forms/d/185usrCREQaUbvAXpWhChkjghdGgmAZXA3lPWpXLLsts/edit)**"  (1 point)
@@ -54,7 +54,6 @@ alt.renderers.enable("png")
 import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
-
 ```
 
 ## Step 1: Develop initial scraper and crawler
@@ -427,10 +426,11 @@ plt.show()
 ### 2. Map by District (PARTNER 2)
 
 ```{python}
+import geopandas as gpd
 filepath = "enforcement_actions_2021_1.csv"
 data = pd.read_csv(filepath)
 filepath = "US_Attorney_Districts_Shapefile_simplified_20241108.csv"
-district = pd.read_csv(filepath)
+district = gpd.read_file(filepath)
 ```
 
 ```{python}
@@ -445,9 +445,6 @@ district_count = (
 )
 ```
 
-```{python}
-print(district_count.iloc[106])
-```
 ```{python}
 def extract_district(agency):
     if 'Attorney’s Office, ' in agency:  # Case with 'Attorney’s Office, '
@@ -479,7 +476,18 @@ district.rename(columns={'Judicial District': 'Judicial_District'}, inplace=True
 # Ensure state names/abbreviations match in both DataFrames
 merged = district.merge(district_count, left_on='Judicial_District', right_on='Agency_Name', how='right')
 
-merged_gdf.head()
+merged.head()
+```
+
+```{python}
+import matplotlib.pyplot as plt
+# Plotting the map
+fig, ax = plt.subplots(1, 1, figsize=(15, 10))
+merged.plot(column='Count', cmap='Blues', linewidth=0.8, edgecolor='0.8', legend=True, ax=ax)
+ax.set_title("Number of Enforcement Actions by Judicial District", fontsize=15)
+ax.set_axis_off()
+plt.show()
+
 ```
 
 ## Extra Credit
